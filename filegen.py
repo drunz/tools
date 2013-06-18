@@ -5,9 +5,9 @@ def gen_files(folder, size_mb, num_files):
 		fid = str(uuid.uuid4())
 		filename = os.path.join(folder, fid)
 
-		with open(filename, 'w+') as f:
+		with open(filename, 'w') as f:
 			for i in xrange(size_mb):
-				f.write(os.urandom(1024**2))
+				f.write(os.urandom(1024**2)+'\n')
 
 def main(args):
 	num_folders = int(args[1]) if len(args) > 1 else 10
@@ -32,4 +32,7 @@ def main(args):
 		
 
 if __name__ == "__main__":
-	main(sys.argv)
+	try:
+		main(sys.argv)
+	except KeyboardInterrupt:
+		print '\nbye'
